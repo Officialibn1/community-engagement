@@ -1,0 +1,9 @@
+export { HeroSection } from "./HeroSection";
+export { FeaturesSection } from "./FeaturesSection";
+export { FacilitiesSection } from "./FacilitiesSection";
+export { StatisticsSection } from "./StatisticsSection";
+export { TeamSection } from "./TeamSection";
+export { SupportCTASection } from "./SupportCTASection";
+export { GallerySection } from "./GallerySection";
+export { EventsSection } from "./EventsSection";
+export { ContactSection } from "./ContactSection";

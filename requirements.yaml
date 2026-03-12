@@ -1,0 +1,13 @@
+packages:
+  "framer-motion": "For smooth scroll animations and premium page transitions"
+  "react-hook-form": "For handling the contact form state"
+  "@hookform/resolvers": "For Zod validation integration with react-hook-form"
+  "zod": "For strict schema validation of form inputs"
+  "clsx": "For conditional tailwind class merging"
+  "tailwind-merge": "For resolving tailwind class conflicts"
+
+images: []
+
+notes:
+  - No backend is required; application is a static showcase.
+  - Using Unsplash images for high-quality community, facility, and event photography.
