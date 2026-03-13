@@ -1,5 +1,7 @@
 {
 	"version": 2,
+	"buildCommand": "pnpm run build",
+	"outputDirectory": "dist",
 	"builds": [
 		{
 			"src": "server/index.js",
@@ -12,8 +14,11 @@
 			"dest": "server/index.js"
 		},
 		{
+			"handle": "filesystem"
+		},
+		{
 			"src": "/(.*)",
-			"dest": "/$1"
+			"dest": "/index.html"
 		}
 	]
 }
