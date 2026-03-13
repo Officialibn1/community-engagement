@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import SponsorRegistration from "./pages/SponsorRegistration";
 import ExhibitorRegistration from "./pages/ExhibitorRegistration";
 import NotFound from "@/pages/not-found";
+import ParticipantRegistration from "./pages/ParticipantRegisteration";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -36,6 +37,10 @@ function Router() {
 			<Route
 				path='/exhibitor-registration'
 				component={ExhibitorRegistration}
+			/>
+			<Route
+				path='/participant-registration'
+				component={ParticipantRegistration}
 			/>
 			<Route component={NotFound} />
 		</Switch>

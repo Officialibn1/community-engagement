@@ -9,6 +9,7 @@ import {
 import { Countdown } from "../ui/countdown";
 import { EVENT_DATE } from "@/lib/constants";
 import { Button } from "../ui/button";
+import { Link } from "wouter";
 
 const fadeInUp = {
 	hidden: { opacity: 0, y: 40 },
@@ -128,9 +129,12 @@ export function FeaturesSection() {
 								<div className='w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent'>
 									<TicketCheck size={24} />
 								</div>
-								<Button className='capitalize'>
-									Register as a Participant or Volunteer
-								</Button>
+
+								<Link href='/participant-registration'>
+									<Button className='capitalize'>
+										Register as a Participant or Volunteer
+									</Button>
+								</Link>
 							</div>
 						</div>
 					</motion.div>

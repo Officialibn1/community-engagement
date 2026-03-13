@@ -29,7 +29,7 @@ const sponsors: Sponsor[] = [
 		id: 1,
 		name: "CLEANSPACE GLOBAL",
 		tier: "PLATINUM",
-		image: "/latango.jpeg",
+		image: "/cleaspace.jpeg",
 	},
 	{
 		id: 2,

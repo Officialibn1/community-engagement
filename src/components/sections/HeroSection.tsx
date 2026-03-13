@@ -72,20 +72,30 @@ export function HeroSection() {
 							built for everyone.
 						</motion.p>
 
+						<motion.h3 className='text-2xl mb-3'>Register As:</motion.h3>
+
 						<motion.div
 							variants={fadeInUp}
 							className='flex flex-col sm:flex-row gap-4'>
 							<Link href='/exhibitor-registration'>
 								<Button
 									size='lg'
+									variant='outlineWhite'
 									className='w-full sm:w-auto text-lg px-8'>
-									Register as Exhibitor
+									Exhibitor
+								</Button>
+							</Link>
+							<Link href='/participant-registration'>
+								<Button
+									size='lg'
+									variant='secondary'
+									className='w-full sm:w-auto text-lg px-8'>
+									Participant
 								</Button>
 							</Link>
 							<Link href='/sponsor-registration'>
 								<Button
 									size='lg'
-									variant='outlineWhite'
 									className='w-full sm:w-auto text-lg px-8'>
 									Become a Sponsor
 								</Button>

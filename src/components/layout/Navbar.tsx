@@ -120,7 +120,7 @@ export function Navbar() {
 								</Link>
 							))}
 							<div className='mt-8 pt-8 border-t border-white/10 flex flex-col gap-5 justify-center'>
-								<Link href='#'>
+								<Link href='/participant-registration'>
 									<Button variant={"outlineWhite"}>
 										<Ticket /> Register Participant
 									</Button>
