@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail, MapPin } from "lucide-react";
+import { api } from "@/lib/api";
 
 const contactSchema = z.object({
 	name: z.string().min(2, "Name is required"),
@@ -27,14 +28,23 @@ export function ContactSection() {
 	});
 
 	const onSubmit = async (data: ContactFormValues) => {
-		await new Promise((resolve) => setTimeout(resolve, 1000));
-		console.log("Form submitted", data);
-		toast({
-			title: "Message Sent!",
-			description: "Thank you for reaching out. We'll get back to you shortly.",
-			variant: "default",
-		});
-		reset();
+		try {
+			await api.contact(data);
+			toast({
+				title: "Message Sent!",
+				description:
+					"Thank you for reaching out. We'll get back to you shortly.",
+				variant: "default",
+			});
+			reset();
+		} catch (error) {
+			toast({
+				title: "Failed to Send",
+				description:
+					"There was an error sending your message. Please try again or contact us directly.",
+				variant: "destructive",
+			});
+		}
 	};
 
 	return (
@@ -96,6 +106,7 @@ export function ContactSection() {
 								</label>
 								<input
 									{...register("name")}
+									disabled={isSubmitting}
 									className={cn(
 										"w-full bg-card border-2 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors",
 										errors.name
@@ -116,6 +127,7 @@ export function ContactSection() {
 								</label>
 								<input
 									{...register("phone")}
+									disabled={isSubmitting}
 									className={cn(
 										"w-full bg-card border-2 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors",
 										errors.phone
@@ -139,6 +151,7 @@ export function ContactSection() {
 							<input
 								{...register("email")}
 								type='email'
+								disabled={isSubmitting}
 								className={cn(
 									"w-full bg-card border-2 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors",
 									errors.email
@@ -160,6 +173,7 @@ export function ContactSection() {
 							</label>
 							<textarea
 								{...register("message")}
+								disabled={isSubmitting}
 								rows={5}
 								className={cn(
 									"w-full bg-card border-2 rounded-xl px-4 py-3 text-foreground focus:outline-none focus:border-primary transition-colors resize-none",

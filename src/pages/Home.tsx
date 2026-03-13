@@ -5,8 +5,9 @@ import {
 	StatisticsSection,
 	SupportCTASection,
 	GallerySection,
-	EventsSection,
 	ContactSection,
+	SponsorshipSection,
+	EventProgramSection,
 } from "@/components/sections";
 
 export default function Home() {
@@ -14,11 +15,13 @@ export default function Home() {
 		<main className='flex-1 w-full overflow-hidden pt-20'>
 			<HeroSection />
 			<FeaturesSection />
+			<EventProgramSection />
+			<SponsorshipSection />
 			<SupportCTASection />
 			<FacilitiesSection />
 			{/* <TeamSection /> */}
 			<ContactSection />
-			<GallerySection />
+			{/* <GallerySection /> */}
 			{/* <EventsSection /> */}
 			<StatisticsSection />
 		</main>

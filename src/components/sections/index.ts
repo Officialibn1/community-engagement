@@ -7,3 +7,5 @@ export { SupportCTASection } from "./SupportCTASection";
 export { GallerySection } from "./GallerySection";
 export { EventsSection } from "./EventsSection";
 export { ContactSection } from "./ContactSection";
+export { default as SponsorshipSection } from "./SponsorshipSection";
+export { default as EventProgramSection } from "./EventProgramSection";

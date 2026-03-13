@@ -8,12 +8,43 @@ import {
 	Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { api } from "@/lib/api";
 
 export function Footer() {
+	const { toast } = useToast();
+	const [email, setEmail] = useState("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
+
+	const handleNewsletterSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!email) return;
+
+		setIsSubmitting(true);
+		try {
+			await api.newsletter({ email });
+			toast({
+				title: "Subscribed!",
+				description: "Thank you for subscribing to our newsletter.",
+				variant: "default",
+			});
+			setEmail("");
+		} catch (error) {
+			toast({
+				title: "Subscription Failed",
+				description: "Please try again or contact us directly.",
+				variant: "destructive",
+			});
+		} finally {
+			setIsSubmitting(false);
+		}
+	};
+
 	return (
 		<footer className='bg-[#11261d] text-white/80 pt-20 pb-10'>
 			<div className='container mx-auto px-4 md:px-6'>
-				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-16'>
+				<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16'>
 					<div className='space-y-6'>
 						<div className='flex items-center gap-2 group'>
 							<div className='bg-accent text-accent-foreground rounded-2xl w-14 h-14 '>
@@ -50,15 +81,38 @@ export function Footer() {
 						</div>
 					</div>
 
-					{/* <div>
-            <h4 className="text-white font-display text-lg font-semibold mb-6">Quick Links</h4>
-            <ul className="space-y-4">
-              <li><Link href="/about" className="hover:text-accent transition-colors flex items-center gap-2"><ArrowRight size={14} className="text-accent"/> About Us</Link></li>
-              <li><Link href="/facilities" className="hover:text-accent transition-colors flex items-center gap-2"><ArrowRight size={14} className="text-accent"/> Facilities</Link></li>
-              <li><Link href="/events" className="hover:text-accent transition-colors flex items-center gap-2"><ArrowRight size={14} className="text-accent"/> Events</Link></li>
-              <li><Link href="/contact" className="hover:text-accent transition-colors flex items-center gap-2"><ArrowRight size={14} className="text-accent"/> Contact</Link></li>
-            </ul>
-          </div> */}
+					<div>
+						<h4 className='text-white font-display text-lg font-semibold mb-6'>
+							Get Involved
+						</h4>
+						<ul className='space-y-4'>
+							<li>
+								<Link
+									href='/sponsor-registration'
+									className='hover:text-accent transition-colors'>
+									Become a Sponsor
+								</Link>
+							</li>
+							<li>
+								<Link
+									href='/exhibitor-registration'
+									className='hover:text-accent transition-colors'>
+									Register as Exhibitor
+								</Link>
+							</li>
+							<li>
+								<Link
+									href='/participant-registration'
+									className='hover:text-accent transition-colors'>
+									Register as Participant
+								</Link>
+							</li>
+						</ul>
+						<div className='mt-6 p-4 bg-white/5 rounded-xl border border-white/10'>
+							<p className='text-xs text-white/60 mb-2'>Sponsorship Tiers</p>
+							<p className='text-sm text-white'>From ₦250,000 to ₦1,000,000</p>
+						</div>
+					</div>
 
 					<div>
 						<h4 className='text-white font-display text-lg font-semibold mb-6'>
@@ -98,14 +152,21 @@ export function Footer() {
 						</p>
 						<form
 							className='flex flex-col gap-3'
-							onSubmit={(e) => e.preventDefault()}>
+							onSubmit={handleNewsletterSubmit}>
 							<input
+								disabled={isSubmitting}
 								type='email'
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
 								placeholder='Email address'
 								className='bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-all'
 								required
 							/>
-							<Button className='w-full'>Subscribe</Button>
+							<Button
+								className='w-full'
+								disabled={isSubmitting}>
+								{isSubmitting ? "Subscribing..." : "Subscribe"}
+							</Button>
 						</form>
 					</div>
 				</div>

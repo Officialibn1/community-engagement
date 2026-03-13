@@ -1,31 +1,85 @@
 export default function About() {
-  return (
-    <main className="flex-1 w-full pt-28 pb-20">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <h1 className="text-5xl font-display font-bold mb-8 text-center">About Arvid City Hall</h1>
-        
-        <div className="prose prose-lg mx-auto text-muted-foreground">
-          <p className="lead text-xl font-medium text-foreground mb-8">
-            Founded in 1924, Arvid City Hall has stood as the central pillar of our community for nearly a century.
-          </p>
-          
-          <p className="mb-6">
-            Our mission is simple: to provide a welcoming, accessible, and versatile space where the citizens of Arvid can come together. Whether it's celebrating life's milestones, engaging in local governance, pursuing fitness goals, or simply enjoying the company of neighbors, the Hall belongs to everyone.
-          </p>
-          
-          <div className="my-12 rounded-2xl overflow-hidden shadow-lg border border-border">
-             {/* historical building */}
-             <img src="https://pixabay.com/get/g5025695efd9683e8b3880d85e7e04a668c6bb513943e08d510fc087987fb9ccff166b01963df11f23d846726f2accaa9499644f50125f77dda684ca335278344_1280.jpg" alt="Historic City Hall" className="w-full h-auto" />
-          </div>
-          
-          <h3 className="text-2xl font-bold text-foreground mb-4">Our Values</h3>
-          <ul className="space-y-4 mb-8">
-            <li><strong>Inclusivity:</strong> We ensure our doors are open and our spaces are accessible to all members of our diverse community.</li>
-            <li><strong>Sustainability:</strong> We are committed to maintaining our historic building while implementing modern, green practices.</li>
-            <li><strong>Community First:</strong> Every decision made by our management team prioritizes the needs and desires of Arvid's residents.</li>
-          </ul>
-        </div>
-      </div>
-    </main>
-  );
+	return (
+		<main className='flex-1 w-full pt-28 pb-20'>
+			<div className='container mx-auto px-4 max-w-4xl'>
+				<h1 className='text-5xl font-display font-bold mb-8 text-center'>
+					About Jabi Lake Clean-Up & Sensitization 2026
+				</h1>
+
+				<div className='prose prose-lg mx-auto text-muted-foreground'>
+					<p className='lead text-xl font-medium text-foreground mb-8'>
+						The Clean-Up and Sensitization Programme at Jabi Lake Park offers a
+						premier opportunity for corporate organizations and brands to
+						demonstrate their commitment to environmental sustainability and
+						social responsibility.
+					</p>
+
+					<p className='mb-6'>
+						Through this partnership, sponsors gain high-level visibility and
+						direct engagement with policymakers, diplomatic stakeholders, and
+						the general public in the heart of the Federal Capital Territory.
+						This initiative aligns with the UN Sustainable Development Goals and
+						provides a platform for meaningful community impact.
+					</p>
+
+					<div className='my-12 rounded-2xl overflow-hidden shadow-lg border border-border'>
+						<img
+							src='/jabi_hero_wide.png'
+							alt='Jabi Lake Park'
+							className='w-full h-auto'
+						/>
+					</div>
+
+					<h3 className='text-2xl font-bold text-foreground mb-4'>
+						Why Partner With Us?
+					</h3>
+					<ul className='space-y-4 mb-8'>
+						<li>
+							<strong>CSR Leadership:</strong> Position your brand as a champion
+							of the UN Sustainable Development Goals and environmental
+							stewardship.
+						</li>
+						<li>
+							<strong>High-Level Visibility:</strong> Access a diverse audience
+							including the Association of Diplomatic Women in Nigeria (ADWIN),
+							Silkcoat Nigeria members, and international stakeholders.
+						</li>
+						<li>
+							<strong>Media Exposure:</strong> Benefit from integrated press
+							coverage, strategic social media campaigns, and direct brand
+							mentions across all event communications.
+						</li>
+						<li>
+							<strong>Community Trust:</strong> Build long-term brand loyalty by
+							contributing to a cleaner, safer, and healthier Abuja.
+						</li>
+					</ul>
+
+					<h3 className='text-2xl font-bold text-foreground mb-4'>
+						Our Mission
+					</h3>
+					<p className='mb-6'>
+						We are committed to creating sustainable environmental change
+						through community engagement, education, and direct action. The Jabi
+						Lake Clean-Up & Sensitization Programme brings together government
+						agencies, diplomatic missions, corporate partners, and local
+						communities to restore and preserve one of Abuja's most iconic
+						natural landmarks.
+					</p>
+
+					<h3 className='text-2xl font-bold text-foreground mb-4'>
+						Partnership Opportunities
+					</h3>
+					<p className='mb-6'>
+						We offer flexible sponsorship tiers ranging from Bronze to Platinum,
+						each designed to provide maximum value and recognition for your
+						organization. Additionally, we welcome resource-based (in-kind)
+						contributions including logistics support, media services, branding
+						materials, and volunteer support—all professionally valued for
+						appropriate tier recognition.
+					</p>
+				</div>
+			</div>
+		</main>
+	);
 }

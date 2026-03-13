@@ -10,7 +10,9 @@ import Facilities from "./pages/Facilities";
 import Events from "./pages/Events";
 import Contact from "./pages/Contact";
 import SponsorRegistration from "./pages/SponsorRegistration";
+import SponsorRegistrationSuccess from "./pages/SponsorRegistrationSuccess";
 import ExhibitorRegistration from "./pages/ExhibitorRegistration";
+import ExhibitorRegistrationSuccess from "./pages/ExhibitorRegistrationSuccess";
 import NotFound from "@/pages/not-found";
 import ParticipantRegistration from "./pages/ParticipantRegisteration";
 
@@ -35,8 +37,16 @@ function Router() {
 				component={SponsorRegistration}
 			/>
 			<Route
+				path='/sponsor-registration/success'
+				component={SponsorRegistrationSuccess}
+			/>
+			<Route
 				path='/exhibitor-registration'
 				component={ExhibitorRegistration}
+			/>
+			<Route
+				path='/exhibitor-registration/success'
+				component={ExhibitorRegistrationSuccess}
 			/>
 			<Route
 				path='/participant-registration'
