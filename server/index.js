@@ -2,15 +2,10 @@ import express from 'express';
 import cors from 'cors';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
-import fs from 'fs';
 
-dotenv.config({ path: '.env' });
+// Load .env.local in development, Vercel injects env vars automatically in production
+dotenv.config({ path: '.env.local' });
 dotenv.config(); // fallback to .env
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -28,32 +23,29 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// Ensure data directory exists
-const dataDir = join(__dirname, 'data');
-if (!fs.existsSync(dataDir)) {
-    fs.mkdirSync(dataDir, { recursive: true });
-}
+const NODEMAILER_EMAIL = process.env.NODEMAILER_EMAIL;
+const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
 
 // Contact form endpoint
 app.post('/api/contact', async (req, res) => {
     try {
         const { name, email, phone, message } = req.body;
 
-        const mailOptions = {
-            from: process.env.NODEMAILER_EMAIL,
-            to: process.env.ADMIN_EMAIL,
+        await transporter.sendMail({
+            from: NODEMAILER_EMAIL,
+            to: ADMIN_EMAIL,
+            replyTo: email,
             subject: `New Contact Form Submission - ${name}`,
             html: `
-				<h2>New Contact Form Submission</h2>
-				<p><strong>Name:</strong> ${name}</p>
-				<p><strong>Email:</strong> ${email}</p>
-				<p><strong>Phone:</strong> ${phone}</p>
-				<p><strong>Message:</strong></p>
-				<p>${message}</p>
-			`,
-        };
+                <h2>New Contact Form Submission</h2>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `,
+        });
 
-        await transporter.sendMail(mailOptions);
         res.json({ success: true, message: 'Contact form submitted successfully' });
     } catch (error) {
         console.error('Contact form error:', error);
@@ -81,26 +73,26 @@ app.post('/api/resource-sponsor', async (req, res) => {
             volunteer: 'Volunteer Support',
         };
 
-        const mailOptions = {
-            from: process.env.NODEMAILER_EMAIL,
-            to: process.env.ADMIN_EMAIL,
+        await transporter.sendMail({
+            from: NODEMAILER_EMAIL,
+            to: ADMIN_EMAIL,
+            replyTo: email,
             subject: `New Resource-Based Sponsorship - ${organizationName}`,
             html: `
-				<h2>New Resource-Based Sponsorship Submission</h2>
-				<p><strong>Organization:</strong> ${organizationName}</p>
-				<p><strong>Contact Person:</strong> ${contactName}</p>
-				<p><strong>Email:</strong> ${email}</p>
-				<p><strong>Phone:</strong> ${phone}</p>
-				<p><strong>Resource Category:</strong> ${categoryLabels[resourceCategory] || resourceCategory}</p>
-				<p><strong>Estimated Value:</strong> ${estimatedValue || 'Not provided'}</p>
-				<p><strong>Resource Description:</strong></p>
-				<p>${resourceDescription}</p>
-				<hr />
-				<p><em>Please assess the market value and assign appropriate sponsorship tier.</em></p>
-			`,
-        };
+                <h2>New Resource-Based Sponsorship Submission</h2>
+                <p><strong>Organization:</strong> ${organizationName}</p>
+                <p><strong>Contact Person:</strong> ${contactName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Phone:</strong> ${phone}</p>
+                <p><strong>Resource Category:</strong> ${categoryLabels[resourceCategory] || resourceCategory}</p>
+                <p><strong>Estimated Value:</strong> ${estimatedValue || 'Not provided'}</p>
+                <p><strong>Resource Description:</strong></p>
+                <p>${resourceDescription}</p>
+                <hr />
+                <p><em>Please assess the market value and assign appropriate sponsorship tier.</em></p>
+            `,
+        });
 
-        await transporter.sendMail(mailOptions);
         res.json({ success: true, message: 'Resource sponsorship submitted successfully' });
     } catch (error) {
         console.error('Resource sponsor error:', error);
@@ -108,7 +100,7 @@ app.post('/api/resource-sponsor', async (req, res) => {
     }
 });
 
-// Newsletter subscription endpoint
+// Newsletter subscription endpoint — email only, no file system
 app.post('/api/newsletter', async (req, res) => {
     try {
         const { email } = req.body;
@@ -117,26 +109,17 @@ app.post('/api/newsletter', async (req, res) => {
             return res.status(400).json({ success: false, message: 'Valid email is required' });
         }
 
-        // Save to file
-        const subscribersFile = join(dataDir, 'newsletter-subscribers.txt');
-        const timestamp = new Date().toISOString();
-        const entry = `${timestamp} - ${email}\n`;
-
-        fs.appendFileSync(subscribersFile, entry);
-
-        // Send notification email
-        const mailOptions = {
-            from: process.env.NODEMAILER_EMAIL,
-            to: process.env.ADMIN_EMAIL,
+        await transporter.sendMail({
+            from: NODEMAILER_EMAIL,
+            to: ADMIN_EMAIL,
             subject: 'New Newsletter Subscription',
             html: `
-				<h2>New Newsletter Subscriber</h2>
-				<p><strong>Email:</strong> ${email}</p>
-				<p><strong>Subscribed at:</strong> ${new Date().toLocaleString()}</p>
-			`,
-        };
+                <h2>New Newsletter Subscriber</h2>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Subscribed at:</strong> ${new Date().toLocaleString()}</p>
+            `,
+        });
 
-        await transporter.sendMail(mailOptions);
         res.json({ success: true, message: 'Successfully subscribed to newsletter' });
     } catch (error) {
         console.error('Newsletter error:', error);
